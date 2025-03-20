@@ -1,0 +1,48 @@
+from art import *
+tprint("CAESAR  CIPHER", space = 5 )
+
+alphabet = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',' '
+]
+
+def encrypt(original_text, shift_amount):
+
+    cipher_text =""
+
+    for i in original_text:
+        shifted_pos = alphabet.index(i) + shift_amount
+        shifted_pos %= len(alphabet)
+        cipher_text += alphabet[shifted_pos]
+
+    print(f"Here is the encoded result:\n{cipher_text}")
+
+
+def decrypt(original_text, shift_amount):
+    
+    output_text =""
+
+    for i in original_text:
+        shifted_pos = alphabet.index(i) - shift_amount
+        shifted_pos %= len(alphabet)
+        output_text += alphabet[shifted_pos]
+
+    print(f"Here is the decoded result:\n{output_text}")
+
+should_continue = True
+while should_continue:
+    direction = input("Type 'e' to encrypt & 'd' to decrypt:\n").lower()
+    text = input("Type Your Message:\n").lower()
+    shift = int(input("Enter your shift number:\n"))
+
+    if direction == "e":
+        encrypt(original_text=text, shift_amount=shift)
+    elif direction == "d":
+        decrypt(original_text=text, shift_amount=shift)
+    else:
+        print("Option is not available")
+    
+    restart = input ("Type 'yes' if you want to go again. Otherwise, type 'no'.\n").lower()
+    if restart == "no":
+        should_continue = False
+        tprint("GOODBYE")
